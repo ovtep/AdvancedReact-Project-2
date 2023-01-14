@@ -1,12 +1,14 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import { connect } from 'react-redux';
-import { removeFromCart } from '../../redux/cart/CartActions';
+import { removeFromFavorite } from '../../redux/favorite/FavoriteActions';
 import { Link } from 'react-router-dom';
-import './Cart.css';
+import './Favorite.css';
 import { ReactComponent as Close} from '../../assets/icons/close.svg';
+import { ReactComponent as Cart} from '../../assets/icons/shopping-cart.svg';
+import { addToCart } from '../../redux/cart/CartActions';
 
-function Cart(props) {
+function Favorite(props) {
     const totalSum = (products) => {
         return products.reduce((acc, product) => {
             return acc + product.quantity * product.price;
@@ -15,7 +17,7 @@ function Cart(props) {
 
     return(
         <Layout>
-            <div className="cart-page container-fluid container-min-max-width
+            <div className="favorite-page container-fluid container-min-max-width
                 d-flex flex-column justify-content-center align-items-center">
                 {
                     props.products.length
@@ -23,8 +25,7 @@ function Cart(props) {
                         <div className="d-flex justify-content-between text-center h4 text-bold">
                             <p className="w-25">Produs</p>
                             <p className="w-25">Pret</p>
-                            <p className="w-25">Cantitate</p>
-                            <p className="w-25">Total</p>
+                            <p className="w-25">Actiuni</p>
                         </div>
                         {
                             props.products.map(product => {
@@ -34,11 +35,23 @@ function Cart(props) {
                                         <p>{ product.name }</p>
                                     </div>
                                     <p className="w-25">{ product.price } { product.currency }</p>
-                                    <p className="w-25">{ product.quantity }</p>
                                     <div className="w-25 d-flex justify-content-center">
-                                        <p className="mr-2">{ product.price * product.quantity } { product.currency }</p>
-                                        <div onClick={() => props.removeFromCart({id: product.id})}>
+                                        
+                                        <div onClick={() => props.removeFromFavorite({id: product.id})}>
                                             <Close />
+                                        </div>
+                                        <div onClick={() => {
+                                                        props.addToCart({
+                                                            product: {
+                                                                id: product.id,
+                                                                name: product.name,
+                                                                price: product.price,
+                                                                currency: product.currency,
+                                                                image: product.image
+                                                            }
+                                                        })
+                                                    }}>
+                                            <Cart />
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +69,7 @@ function Cart(props) {
                         </div>
                     </div>
                     : <div className="d-flex flex-column align-items-center">
-                        <p className="h3">Nu ai produse în coș!</p>
+                        <p className="h3">Nu ai produse în favorite!</p>
                         <Link to="/"><button className="btn btn-outline-dark">Inapoi la home</button></Link>
                     </div>
                 }
@@ -67,14 +80,15 @@ function Cart(props) {
 
 function mapStateToProps(state) {
     return {
-        products: state.cart.products
+        products: state.favorite.products
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        removeFromCart: (payload) => dispatch(removeFromCart(payload))
+        addToCart: (payload) => dispatch(addToCart(payload)),
+        removeFromFavorite: (payload) => dispatch(removeFromFavorite(payload))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorite);

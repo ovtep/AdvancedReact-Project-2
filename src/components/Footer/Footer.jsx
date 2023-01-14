@@ -20,7 +20,7 @@ function Footer() {
                     <p className="m-0">
                         <a href="mailto:razvan.cirlugea@gmail.com">
                             <Mail className="mr-1 mb-1 footer-icon"/>
-                            razvan.cirlugea@gmail.com
+                            ovidiu.tepescu@gmail.com
                         </a>
                     </p>
                     <p className="m-0"><Phone className="mr-1 footer-icon"/>+40722228282</p>
@@ -28,21 +28,21 @@ function Footer() {
                 <div className="footer-group">
                     <h3 className="h5">Contactează-mă:</h3>
                     <p className="m-0">
-                        <a href="https://github.com/razvancir96">
+                        <a href="https://github.com/ovtep">
                             <GitHub className="mr-1 mb-1 footer-icon"/>
-                            razvancir96
+                            ovtep
                         </a>
                     </p>
                     <p className="m-0">
-                        <a href="https://www.linkedin.com/in/razvancirlugea/">
+                        <a href="https://github.com/ovtep">
                             <LinkedIn className="mr-1 footer-icon"/>
-                            razvancirlugea
+                            ovtep
                         </a>
                     </p>
                 </div>
             </div>
             <div className="text-center py-3">
-                &copy; Răzvan Cîrlugea, 2019
+                &copy; Ovidiu Tepescu, 2023
             </div>
         </footer>
     );

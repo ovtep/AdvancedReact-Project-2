@@ -3,7 +3,8 @@ import Layout from '../../components/Layout';
 import products from '../../utils/products.json';
 import './Product.css';
 import { connect } from 'react-redux';
-import { addToCart } from '../../redux/actions/cart';
+import { addToCart } from '../../redux/cart/CartActions';
+import { addToFavorite } from '../../redux/favorite/FavoriteActions';
 
 class Product extends React.Component {
     constructor(props) {
@@ -58,6 +59,22 @@ class Product extends React.Component {
                             >
                                 Adaugă în coș
                             </button>
+                            <button
+                                className="btn btn-dark mb-4 mx-2 font-weight-bold"
+                                onClick={() => {
+                                    this.props.addToFavorite({
+                                        product: {
+                                            id: product.id,
+                                            name: product.name,
+                                            price: product.price,
+                                            currency: product.currency,
+                                            image: product.image
+                                        }
+                                    })
+                                }}
+                            >
+                                Adaugă în favorite
+                            </button>
                             <p><span className="font-weight-bold">Mărime</span>: {product.size}</p>
                             <p><span className="font-weight-bold">Culoare</span>: {product.colour}</p>
                             <p><span className="font-weight-bold">Material</span>: {product.material}</p>
@@ -74,7 +91,8 @@ class Product extends React.Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addToCart: (payload) => dispatch(addToCart(payload))
+        addToCart: (payload) => dispatch(addToCart(payload)),
+        addToFavorite: (payload) => dispatch(addToFavorite(payload))
     }
 }
 

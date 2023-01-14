@@ -4,7 +4,7 @@ import Logo from '../../assets/images/logo.png';
 import { ReactComponent as Google } from '../../assets/icons/google.svg';
 import './Login.css'
 import { connect } from 'react-redux';
-import { loginUser, loginUserWithFacebook } from '../../redux/actions/user';
+import { loginUser, loginUserWithFacebook } from '../../redux/user/UserActions';
 
 
 class Login extends React.Component {
